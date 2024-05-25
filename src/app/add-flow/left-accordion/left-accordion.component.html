@@ -1,0 +1,133 @@
+<ngb-accordion
+  #acc="ngbAccordion"
+  activeIds="ngb-panel-0,ngb-panel-1, ngb-panel-2, ngb-panel-3"
+  class="accordion"
+>
+<ngb-panel [id]="'ngb-panel-0'" (click)="acc.toggle('ngb-panel-0')">
+  <ng-template ngbPanelTitle>
+    <div class="d-flex justify-content-between align-items-center">
+      <span>System</span>
+      <i
+        class="feather panel-header-icon icon-chevron-{{
+                  acc.isExpanded('ngb-panel-0') ? 'up' : 'down'
+                }}"
+      ></i>
+    </div>
+  </ng-template>
+  <ng-template ngbPanelContent>
+    <div class="icon-container system-icons">
+      <ng-container *ngFor="let icon of icons">
+        <div
+          class="icon"
+          *ngIf="icon.iconType === IconType.System"
+        >
+          <p>{{ icon.name }}</p>
+          <img
+            [src]="icon.icon"
+            alt="{{ icon.name }}"
+            [draggable]="true"
+            (dragstart)="onDragStart($event, icon)"
+          />
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
+</ngb-panel>
+
+<ngb-panel [id]="'ngb-panel-1'" (click)="acc.toggle('ngb-panel-1')">
+  <ng-template ngbPanelTitle>
+    <div class="d-flex justify-content-between align-items-center">
+      <span>Fulfilment</span>
+      <i
+        class="feather panel-header-icon icon-chevron-{{
+                  acc.isExpanded('ngb-panel-1') ? 'up' : 'down'
+                }}"
+      ></i>
+    </div>
+  </ng-template>
+  <ng-template ngbPanelContent>
+    <div class="icon-container">
+      <ng-container *ngFor="let icon of icons">
+        <div
+          class="icon"
+          *ngIf="
+                    icon.iconType === IconType.Fulfilment && !icon.isHidden
+                  "
+        >
+          <p>{{ icon.name }}</p>
+          <img
+            [src]="icon.icon"
+            alt="{{ icon.name }}"
+            [draggable]="true"
+            (dragstart)="onDragStart($event, icon)"
+          />
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
+</ngb-panel>
+
+<ngb-panel [id]="'ngb-panel-2'" (click)="acc.toggle('ngb-panel-2')">
+  <ng-template ngbPanelTitle>
+    <div class="d-flex justify-content-between align-items-center">
+      <span>Communication</span>
+      <i
+        class="feather panel-header-icon icon-chevron-{{
+                  acc.isExpanded('ngb-panel-2') ? 'up' : 'down'
+                }}"
+      ></i>
+    </div>
+  </ng-template>
+  <ng-template ngbPanelContent>
+    <div class="icon-container">
+      <ng-container *ngFor="let icon of icons">
+        <div
+          class="icon"
+          *ngIf="
+                    icon.iconType === IconType.Communication && !icon.isHidden
+                  "
+        >
+          <p>{{ icon.name }}</p>
+          <img
+            [src]="icon.icon"
+            alt="{{ icon.name }}"
+            [draggable]="true"
+            (dragstart)="onDragStart($event, icon)"
+          />
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
+</ngb-panel>
+
+<ngb-panel [id]="'ngb-panel-3'" (click)="acc.toggle('ngb-panel-3')">
+  <ng-template ngbPanelTitle>
+    <div class="d-flex justify-content-between align-items-center">
+      <span>Reward</span>
+      <i
+        class="feather panel-header-icon icon-chevron-{{
+                  acc.isExpanded('ngb-panel-3') ? 'up' : 'down'
+                }}"
+      ></i>
+    </div>
+  </ng-template>
+  <ng-template ngbPanelContent>
+    <div class="icon-container">
+      <ng-container *ngFor="let icon of icons">
+        <div
+          class="icon"
+          *ngIf="icon.iconType === IconType.Reward && !icon.isHidden"
+        >
+          <p>{{ icon.name }}</p>
+          <img
+            [src]="icon.icon"
+            alt="{{ icon.name }}"
+            [draggable]="true"
+            (dragstart)="onDragStart($event, icon)"
+          />
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
+</ngb-panel>
+</ngb-accordion>

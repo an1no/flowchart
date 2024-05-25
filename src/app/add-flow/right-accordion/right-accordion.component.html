@@ -1,0 +1,54 @@
+<div class="right-container">
+  <ng-container
+    *ngTemplateOutlet="nodeTemplate; context: { $implicit: node }"
+  ></ng-container>
+<ng-template #nodeTemplate let-node let-parent="parent">
+  <div
+    *ngIf="node.type === Type.Regular"
+    class="node-container"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event, node.id)"
+  >
+    <div class="node" [id]="node.id">
+      <img
+        *ngIf="node.icon"
+        [src]="node.icon"
+        alt="{{ node.name }}"
+        (click)="onIconClick(node.id)"
+      />
+      <small>{{node.name}}</small>
+      <div
+        *ngIf="selectedNodeId === node.id && node.name !== 'Selection'"
+        class="actions"
+      >
+        <button
+          class="btn btn-sm feather icon-edit"
+        ></button>
+        <button
+          class="btn btn-sm feather icon-trash"
+          (click)="onDeleteNode(selectedNodeId)"
+        ></button>
+      </div>
+
+    </div>
+    <!-- Arrow pointing to the next node, if any -->
+    <img
+      *ngIf="node.next && !node.isEnd"
+      src="assets/icons/arrow.svg"
+      alt="Arrow"
+      class="arrow"
+    />
+  </div>
+  <!-- Render the 'next' node if it exists -->
+  <ng-container *ngIf="node.next && !node.isEnd">
+    <ng-container
+      *ngTemplateOutlet="
+            nodeTemplate;
+            context: { $implicit: node.next, parent: node }
+          "
+    >
+    </ng-container>
+  </ng-container>
+</ng-template>
+</div>

@@ -1,0 +1,13 @@
+<div class="flow-container">
+  <div class="flow-container--left">
+    <app-left-accordion
+      [icons]="icons"
+      (onIconDragStart)="onDragStart($event)"
+    ></app-left-accordion>
+  </div>
+  <div class="flow-container--right">
+    <app-right-accordion
+      [currentIcon]="currentIcon"
+    ></app-right-accordion>
+  </div>
+</div>
