@@ -15,17 +15,6 @@ export const ICONS :IIcon[] = [
     nodeType: Type.DecisionSplit,
   },
   {
-    id: 28,
-    name: "Condition Split",
-    type: NodeType.ConditionSplit,
-    icon: "assets/icons/condition-split.svg",
-    iconType: IconType.System,
-    isHidden: false,
-    isEnd: false,
-    hasMoreThanOneChild: true,
-    nodeType: Type.ConditionSplit,
-  },
-  {
     id: 2,
     name: "Wait",
     type: NodeType.Wait,

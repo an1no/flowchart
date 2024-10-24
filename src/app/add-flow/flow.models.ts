@@ -17,8 +17,7 @@ export interface Node {
 
 export enum Type {
   Regular = 0,
-  DecisionSplit = 1,
-  ConditionSplit = 2
+  DecisionSplit = 1
 }
 
 export enum IconType {
@@ -74,6 +73,5 @@ export enum NodeType {
   Freeround = 25,
   CashBack = 26,
   Cash=27,
-  ConditionSplit = 28,
   Selection = 29,
 }

@@ -86,8 +86,7 @@ export class NodeService {
       return;
     }
     if (
-      node.type == Type.DecisionSplit ||
-      node.type == Type.ConditionSplit
+      node.type == Type.DecisionSplit
     ) {
       node.noLevel =
         this.countDecisionSplits(node.yes) +
@@ -128,8 +127,7 @@ export class NodeService {
       this.countDecisionSplits(node.yes, visited) +
       this.countDecisionSplits(node.no, visited);
     if (
-      node.type == Type.DecisionSplit ||
-      node.type == Type.ConditionSplit
+      node.type == Type.DecisionSplit
     ) {
       count += 1;
     }

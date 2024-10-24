@@ -9,6 +9,7 @@
     (dragover)="onDragOver($event)"
     (dragleave)="onDragLeave($event)"
     (drop)="onDrop($event, node.id)"
+    [style.bottom]="calculateNodePosition(node, parent)"
   >
     <div class="node" [id]="node.id">
       <img
@@ -49,6 +50,103 @@
           "
     >
     </ng-container>
+  </ng-container>
+  <!-- Decision split node -->
+  <ng-container *ngIf="node.type === Type.DecisionSplit">
+    <div
+      class="decision-split-container"
+      [style.bottom]="calculateNodePosition(node, parent)"
+    >
+      <div class="node decision-split" [id]="node.id">
+        <img
+          [src]="node.icon"
+          alt="{{ node.name }}"
+          [draggable]="false"
+          (click)="onIconClick(node.id)"
+        />
+        <small>{{ node.name }}</small>
+        <div
+          *ngIf="selectedNodeId === node.id && node.name !== 'Selection'"
+          class="actions"
+          [style.z-index]="calculateZIndex(node.level)"
+        >
+          <button
+            class="btn btn-sm feather icon-edit"
+          ></button>
+          <button
+            class="btn btn-sm feather icon-trash"
+            (click)="onDeleteNode(selectedNodeId)"
+          ></button>
+        </div>
+      </div>
+      <!-- 'Yes' decision path -->
+      <div
+        *ngIf="node.yes"
+        class="decision-path yes-path"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event, node.yes.id)"
+      >
+        <p>Yes</p>
+        <img
+          class="yes-arrow"
+          src="assets/icons/yes-arrow.svg"
+          alt="Yes Arrow"
+          class="arrow"
+        />
+        <ng-container
+          *ngTemplateOutlet="
+                nodeTemplate;
+                context: { $implicit: node.yes, parent: node }
+              "
+        ></ng-container>
+      </div>
+      <!-- 'No' decision path -->
+      <div
+        *ngIf="node.no"
+        class="decision-path no-path"
+        [style.z-index]="calculateZIndex(node.no.level)"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event, node.no.id)"
+      >
+        <p [style.top]="calculateNoTopPosition(node.noLevel)">No</p>
+        <div class="arrow">
+          <svg
+            width="99"
+            [style.height]="calculateHeight(node.noLevel)"
+            [attr.viewBox]="calculateViewBox(node.noLevel)"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- New vertical line -->
+            <line
+              x1="0"
+              y1="0"
+              x2="0"
+              [attr.y2]="calculateY2(node.noLevel)"
+              stroke="#CECCCC"
+              stroke-width="2"
+            />
+
+            <!-- Modified path without the vertical line segments -->
+            <path
+              [attr.transform]="calculateTransform(node.noLevel)"
+              id="Shape"
+              d="M98.3536 108.854C98.5488 108.658 98.5488 108.342 98.3536 108.146L95.1716 104.964C94.9763 104.769 94.6597 104.769 94.4645 104.964C94.2692 105.16 94.2692 105.476 94.4645 105.672L97.2929 108.5L94.4645 111.328C94.2692 111.524 94.2692 111.84 94.4645 112.036C94.6597 112.231 94.9763 112.231 95.1716 112.036L98.3536 108.854ZM24.5 109H98V108H24.5V109ZM0 84.5C0 98.031 10.969 109 24.5 109V108C11.5213 108 1 97.4787 1 84.5H0Z"
+              fill="#CECCCC"
+            />
+          </svg>
+        </div>
+        <ng-container
+          *ngTemplateOutlet="
+                nodeTemplate;
+                context: { $implicit: node.no, parent: node }
+              "
+        >
+        </ng-container>
+      </div>
+    </div>
   </ng-container>
 </ng-template>
 </div>
