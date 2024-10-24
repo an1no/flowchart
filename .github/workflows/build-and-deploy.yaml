@@ -42,7 +42,7 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          docker buildx build --platform linux/amd64 --cache-from=type=local,src=/tmp/.buildx-cache --cache-to=type=local,dest=/tmp/.buildx-cache --tag goodot/flowchart:latest --push .
+          docker buildx build --platform linux/amd64 --cache-from=type=local,src=/tmp/.buildx-cache --cache-to=type=local,dest=/tmp/.buildx-cache --tag an1no/flowchart:latest --push .
   deploy:
     runs-on: ubuntu-latest
     environment: ec2
